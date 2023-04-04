@@ -126,7 +126,7 @@ def ChangeText(ctx, text):
 	text = text.replace("&channel;", str(ctx.channel))
 	text = text.replace("&Master_ID;", str(Master_ID))
 	text = text.replace("&bot_ID;", str(bot_ID))
-	text = text.replace("&message;", str(ctx.content))
+	text = text.replace("&message;", str(ID_To_Name(ctx.content)))
 	return text
 	
 
