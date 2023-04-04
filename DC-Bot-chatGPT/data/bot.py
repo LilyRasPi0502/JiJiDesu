@@ -121,7 +121,7 @@ async def cmd(ctx, cmd):
 		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {Str}")
 
 def ChangeText(ctx, text):
-	text = text.replace("&author;", str(ctx.author[:-5]))
+	text = text.replace("&author;", str(ctx.author)[:-5])
 	text = text.replace("&guild;", str(ctx.guild))
 	text = text.replace("&channel;", str(ctx.channel))
 	text = text.replace("&Master_ID;", str(Master_ID))
