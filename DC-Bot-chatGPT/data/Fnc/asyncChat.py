@@ -107,5 +107,5 @@ if __name__ == "__main__":
 	ChaInt()
 	while True:
 		print(chai(input(">")))
-		await page.screenshot(path="data/example.png")
+		#await page.screenshot(path="data/example.png")
 
