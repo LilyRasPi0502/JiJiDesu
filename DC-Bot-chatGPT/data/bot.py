@@ -37,7 +37,7 @@ async def changeActivity():
 	f = open("data/json/Stetas.json", "r", encoding="utf-8")
 	data			=	json.load(f)
 	State			=	data["State"]
-	await client.change_presence(activity=discord.Activity(name=State, type=1))
+	await client.change_presence(activity=discord.Activity(name=State, type=0))
 
 #Reflash CharacterAI
 @tasks.loop(minutes=30)
@@ -113,9 +113,11 @@ async def cmd(ctx, cmd):
 	
 	else:								#暴力連接chatGPT
 
+		
 		async with ctx.channel.typing():
 			f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
 			text = ChangeText(ctx, f"{json.load(f)['Character']}")
+			
 			Str = await chai(text)
 		await ctx.reply(Str)
 		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {Str}")
