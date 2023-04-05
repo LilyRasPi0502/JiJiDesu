@@ -1,5 +1,0 @@
-python -m pip install -U discord.py
-
-pip install pytest-playwright
-
-playwright install
