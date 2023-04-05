@@ -86,20 +86,28 @@ async def chai(text):
 	
 	await page.get_by_placeholder("Send a message...").fill(text)
 	await page.get_by_placeholder("Send a message...").press("Enter")
-	nextFlag = await page.wait_for_selector(".gap-2")
-	if await nextFlag.is_visible():
-		Sstr = ""
-		
-		while Sstr.find("Regenerate response") != -1:
-			S = await page.query_selector_all(".gap-2")
-			for i in range(len(S)):
-				Sstr = await S[i].inner_text()
-				if Sstr.find("Regenerate response") != -1:
-					break
-		div = await page.query_selector_all(".markdown")
-		output_text = await div[-1].inner_text()
-	else:
-		output_text = f"I don't know. <:BocchiPain:1058756560026873856> "
+	
+	Sstr = ""
+	
+	while Sstr.find("Regenerate response") != -1:
+		S = await page.query_selector_all(".btn")
+		for i in range(len(S)):
+			#print(f"find Stop: {await S[i].inner_text()}")
+			Sstr = await S[i].inner_text()
+			if Sstr.find("Regenerate response") == -1:
+				break
+
+	while Sstr.find("Regenerate response") == -1:
+		S = await page.query_selector_all(".btn")
+		for i in range(len(S)):
+			#print(f"find Regenerate: {await S[i].inner_text()}")
+			Sstr = await S[i].inner_text()
+			if Sstr.find("Regenerate response") != -1:
+				break
+
+	div = await page.query_selector_all(".markdown")
+	output_text = await div[-1].inner_text()
+	
 	return output_text
 
 
@@ -107,5 +115,4 @@ if __name__ == "__main__":
 	ChaInt()
 	while True:
 		print(chai(input(">")))
-		#await page.screenshot(path="data/example.png")
 
