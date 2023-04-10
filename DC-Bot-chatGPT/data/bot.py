@@ -116,21 +116,31 @@ async def cmd(ctx, cmd):
 		
 		async with ctx.channel.typing():
 			f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
-			text = ChangeText(ctx, f"{json.load(f)['Character']}")
+			text = await ChangeText(ctx, f"{json.load(f)['Character']}")
 			
 			Str = await chai(text)
 		await ctx.reply(Str)
 		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {Str}")
 
-def ChangeText(ctx, text):
+async def ChangeText(ctx, text):
+	if ctx.reference is not None:
+		f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
+		
+		msg = f"{json.load(f)['Reference']}"
+		rectx = await ctx.channel.fetch_message(ctx.reference.message_id)
+		msg = msg.replace("&reference;", str(ID_To_Name(rectx.content)))
+		msg = msg.replace("&author;", str(rectx.author)[:-5])
+	else:
+		msg = ""
 	text = text.replace("&author;", str(ctx.author)[:-5])
 	text = text.replace("&guild;", str(ctx.guild))
 	text = text.replace("&channel;", str(ctx.channel))
 	text = text.replace("&Master_ID;", str(Master_ID))
 	text = text.replace("&bot_ID;", str(bot_ID))
 	text = text.replace("&message;", str(ID_To_Name(ctx.content)))
+	text = text.replace("&ReferenceSTR;", str(ID_To_Name(msg)))
 	return text
-	
+
 
 #傳送訊息用
 async def sender(Message, Str):
