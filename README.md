@@ -31,4 +31,6 @@ Name.json -> 設定機器人默認名稱與別名(這個必填不然只要講話
 # 更新日誌
 
 - 20230411
-  - 更新bot.py內容及data/json/CharactSet.json架構使其可智慧型判讀提及之訊息
+  - 更新bot.py內容及data/json/CharactSet.json架構使其可自訂是否判讀提及之訊息
+- 20230412
+  - 更新bot.py內容:刪除Cut_Name()function改用String原生的split方法做文字指令之提取
