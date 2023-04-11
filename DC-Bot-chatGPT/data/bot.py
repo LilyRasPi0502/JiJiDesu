@@ -94,8 +94,8 @@ async def cmd(ctx, cmd):
 				await FileSender(ctx, FileName)
 			await message.delete()
 		else:
-			print(f"[{Get_Time()}] Replace message of {str(ctx.guild)}.{str(ctx.channel)}: {Cut_Name(cmd)[8:]}")
-			await sender(ctx, Cut_Name(cmd)[8:])
+			print(f"[{Get_Time()}] Replace message of {str(ctx.guild)}.{str(ctx.channel)}: {cmd.split('Replace ')[1]}")
+			await ctx.channel.send(cmd.split("Replace ")[1])
 			if ctx.attachments:
 				FileName	= f"./data/file/file.{ctx.attachments[0].url.split('/')[-1].split('.')[-1]}"
 				res2 = requests.post(ctx.attachments[0].url)
@@ -167,18 +167,6 @@ def is_Mention(Message):
 		if Message.find(FindName) != -1:
 			return True
 	return False
-
-#從文字中去除自己的名字
-def Cut_Name(Message):
-	My_Name = open("data/json/Name.json", "r", encoding="utf-8")
-	data			=	json.load(My_Name)
-	NameList		=	data["Name"]
-	for i in range(len(NameList)):
-		FindName	=	NameList[str(i)]
-		if Message.find(FindName) != -1:
-			Str = Message.split(FindName)[0] + Message.split(FindName)[1]
-			return Str
-	return Message
 
 #將代號或ID指向默認的名字
 def ID_To_Name(Message):
