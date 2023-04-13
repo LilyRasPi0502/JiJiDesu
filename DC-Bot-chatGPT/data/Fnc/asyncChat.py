@@ -17,29 +17,44 @@ async def ChaInt():
 	context = await browser.new_context()
 	page = await context.new_page()
 	await page.goto(f"https://chat.openai.com/chat")
+	await asyncio.sleep(5)
 	
-	await Login()
-	await ClickAd()
-	await selectChat()
+	if page.url.find("https://chat.openai.com/chat") == -1:
+		await Login(0)
+		await ClickAd()
+		
+	if page.url.find("https://chat.openai.com/chat") != -1:
+		await selectChat()
+		
+	print("Page initialization complete!")
 	
-	
-async def Login():
+async def Login(arg):
 	global page
 	config		= open("data/json/chatGPT_Config.json", "r", encoding="utf-8")
 	conf		= json.load(config)
 
 	Login = await page.wait_for_selector(".btn-primary")
 	await Login.click()
-	Email = await page.wait_for_selector(".cf072f6c3")
+	
+	if arg == 0:
+		print("Click Login button")
+	await page.screenshot(path="data/example.png")
+	
+	Email = await page.wait_for_selector(".input")
 	await Email.fill(conf["Account"])
 	await Email.press("Enter")
-	PW = await page.wait_for_selector(".c8f0f4668")
+	if arg == 0:
+		print(f"Enter Account: {conf['Account']}")
+	await page.screenshot(path="data/example.png")
+			
+	PW = await page.wait_for_selector(".input")
 	await PW.fill(conf["Password"])
 	await PW.press("Enter")
-				
-
-	print("on login")
+	if arg == 0:
+		print(f"Enter Password: {Pwd(conf['Password'])}")
 	await page.screenshot(path="data/example.png")
+			
+	print("chatGPt on login")
 	
 async def ClickAd():
 	ADB0 = await page.wait_for_selector(".ml-auto")
@@ -57,7 +72,7 @@ async def ReflashAI():
 	Login = await page.query_selector(".btn-primary")
 	if str(Login).find("NoneType") != -1:
 		if await Login.is_visible():
-			await Login()
+			await Login(1)
 			await ClickAd()
 	await selectChat()
 
@@ -110,6 +125,11 @@ async def chai(text):
 	
 	return output_text
 
+def Pwd(Pwd):
+	Str = ""
+	for i in range(len(Pwd)):
+		Str += "*"
+	return Str
 
 if __name__ == "__main__":
 	ChaInt()
