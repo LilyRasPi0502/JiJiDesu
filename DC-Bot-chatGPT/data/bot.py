@@ -139,6 +139,7 @@ async def ChangeText(ctx, text):
 	text = text.replace("&bot_ID;", str(bot_ID))
 	text = text.replace("&message;", str(ID_To_Name(ctx.content)))
 	text = text.replace("&ReferenceSTR;", str(ID_To_Name(msg)))
+	text = text.replace("&Time;", str(Get_Time()))
 	return text
 
 
