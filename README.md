@@ -1,6 +1,6 @@
 # JiJiDesu
 
-# How to use?
+# How to use?(好阿都不要教阿)
 在Launcher.exe的目錄下使用`python data/bot.py`指令或是直接在windows環境下使用Launcher.exe
 
 # 環境建置
@@ -23,7 +23,7 @@ Name.json -> 設定機器人默認名稱與別名(這個必填不然只要講話
 
 到chatGPT網站新建聊天室改好名稱
 
-然後存去chatGPT_Config.json就好了
+然後把聊天室名稱存去chatGPT_Config.json就好了
 
 
 到這裡就可以開啟機器人來玩了
