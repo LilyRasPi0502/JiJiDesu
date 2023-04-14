@@ -36,3 +36,4 @@ Name.json -> 設定機器人默認名稱與別名(這個必填不然只要講話
   - 更新bot.py內容:刪除Cut_Name()function改用String原生的split方法做文字指令之提取
 - 20230414
   - 更新data/Fnc/asyncChat.py內容:新增各式登入時提示及修正帳號密碼的class
+  - 更新data/bot.py及data/Json/CharactSet.json內容:可加入Server Time讓機器人知道該如何問候早午晚安
