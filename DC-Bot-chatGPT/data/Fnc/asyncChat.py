@@ -95,11 +95,15 @@ async def selectChat():
 	Sstr = ""
 	
 	while True:
-		S = await page.query_selector_all(Chat)
-		for i in range(len(S)):
-			Sstr = await S[i].inner_text()
-			if Sstr.find("Clear conversations") != -1:
-				break
+		try:
+			S = await page.query_selector_all(Chat)
+		except:
+			S = None
+		if S != None:
+			for i in range(len(S)):
+				Sstr = await S[i].inner_text()
+				if Sstr.find("Clear conversations") != -1:
+					break
 		if Sstr.find("Clear conversations") != -1:
 			break
 		
