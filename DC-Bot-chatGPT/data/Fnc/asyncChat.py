@@ -21,11 +21,10 @@ async def ChaInt():
 	
 	if page.url.find("https://chat.openai.com/chat") == -1:
 		await Login(0)
+	
 		await ClickAd()
 		
-	if page.url.find("https://chat.openai.com/chat") != -1:
-		await selectChat()
-		
+	
 	print("Page initialization complete!")
 	
 async def Login(arg):
@@ -57,12 +56,23 @@ async def Login(arg):
 	print("chatGPt on login")
 	
 async def ClickAd():
-	ADB0 = await page.wait_for_selector(".ml-auto")
-	await ADB0.click()
-	ADB1 = await page.wait_for_selector(".ml-auto")
-	await ADB1.click()
-	ADB2 = await page.wait_for_selector(".ml-auto")
-	await ADB2.click()
+	await asyncio.sleep(5)
+	but = await page.query_selector(".btn")
+	if but is None:
+		return
+	if str(await but.inner_text()).find("Next") == -1:
+		return
+		
+	for i in range(3):
+		Sstr = ""
+		ADB = await page.query_selector_all(".btn")
+		for i in range(len(ADB)):
+			Sstr = await ADB[i].inner_text()
+			if Sstr.find("Next") != -1 or Sstr.find("Done") != -1:
+				await ADB[i].click()
+		await asyncio.sleep(5)
+	await page.screenshot(path="data/example.png")
+	print("Tour skipped")
 	
 async def ReflashAI():
 	global page
@@ -80,10 +90,19 @@ async def selectChat():
 	global page
 	config		= open("data/json/chatGPT_Config.json", "r", encoding="utf-8")
 	conf		= json.load(config)
-	await asyncio.sleep(5)
 	Chat = ".gap-3"
 	ChatName = conf["ChatName"]
 	Sstr = ""
+	
+	while True:
+		S = await page.query_selector_all(Chat)
+		for i in range(len(S)):
+			Sstr = await S[i].inner_text()
+			if Sstr.find("Clear conversations") != -1:
+				break
+		if Sstr.find("Clear conversations") != -1:
+			break
+		
 	await page.screenshot(path="data/example.png")
 	S = await page.query_selector_all(Chat)
 	for i in range(len(S)):
@@ -130,6 +149,10 @@ def Pwd(Pwd):
 	for i in range(len(Pwd)):
 		Str += "*"
 	return Str
+	
+def Get_Time():
+	now = datetime.datetime.now()
+	return now.strftime("%Y-%m-%d %H:%M:%S")
 
 if __name__ == "__main__":
 	ChaInt()
