@@ -79,11 +79,15 @@ async def ReflashAI():
 	
 	await page.reload()
 	
-	Login = await page.query_selector(".btn-primary")
-	if str(Login).find("NoneType") != -1:
-		if await Login.is_visible():
-			await Login(1)
-			await ClickAd()
+	await asyncio.sleep(5)
+	
+	if page.url.find("https://chat.openai.com/chat") == -1:
+		Login = await page.query_selector(".btn-primary")
+		if str(Login).find("NoneType") != -1:
+			if await Login.is_visible():
+				await Login(1)
+				await ClickAd()
+	await asyncio.sleep(1)
 	await selectChat()
 
 async def selectChat():
