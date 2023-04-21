@@ -106,19 +106,13 @@ async def selectChat():
 		if S != None:
 			for i in range(len(S)):
 				Sstr = await S[i].inner_text()
-				if Sstr.find("Clear conversations") != -1:
+				if Sstr.find(ChatName) != -1:
+					await S[i].click()
+					print(f"select chat name: {ChatName}")
 					break
-		if Sstr.find("Clear conversations") != -1:
+		if Sstr.find(ChatName) != -1:
 			break
 		
-	await page.screenshot(path="data/example.png")
-	S = await page.query_selector_all(Chat)
-	for i in range(len(S)):
-		Sstr = await S[i].inner_text()
-		if Sstr.find(ChatName) != -1:
-			await S[i].click()
-			print(f"select chat name: {ChatName}")
-			break
 	await page.screenshot(path="data/example.png")
 
 async def chai(text):
