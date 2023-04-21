@@ -38,4 +38,6 @@ Name.json -> 設定機器人默認名稱與別名(這個必填不然只要講話
   - 更新data/Fnc/asyncChat.py內容:新增各式登入時提示及修正帳號密碼的class選擇器
   - 更新data/bot.py及data/Json/CharactSet.json內容:可加入Server Time讓機器人知道該如何問候早午晚安
 - 20230418
-  - 更新data/Fnc/asyncChat.py內容:修正導引提示自動略過函數()及聊天室選擇函數稍微改善聊天選不到的問題
+  - 更新data/Fnc/asyncChat.py內容:修正導引提示自動略過函數及聊天室選擇函數稍微改善聊天選不到的問題
+- 20230421
+  - 更新data/Fnc/asyncChat.py內容:因應openai改變版面配置關係,微調selectChat函數,請一定要在data/json/chatGPT_Config.json輸入正確的
