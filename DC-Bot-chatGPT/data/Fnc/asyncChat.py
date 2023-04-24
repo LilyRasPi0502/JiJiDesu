@@ -119,18 +119,28 @@ async def chai(text):
 	global page
 	
 	await page.screenshot(path="data/example.png")
+	Sstr = ""
 	
+	while Sstr.find("Regenerate response") == -1:
+		S = await page.query_selector_all(".btn")
+		for i in range(len(S)):
+			#print(f"find Regenerate: {await S[i].inner_text()}")
+			Sstr = await S[i].inner_text()
+			if Sstr.find("Regenerate response") != -1:		#wait genelate complete
+				break
+				
+				
 	await page.get_by_placeholder("Send a message...").fill(text)
 	await page.get_by_placeholder("Send a message...").press("Enter")
 	
-	Sstr = ""
+	
 	
 	while Sstr.find("Regenerate response") != -1:
 		S = await page.query_selector_all(".btn")
 		for i in range(len(S)):
 			#print(f"find Stop: {await S[i].inner_text()}")
 			Sstr = await S[i].inner_text()
-			if Sstr.find("Regenerate response") == -1:
+			if Sstr.find("Regenerate response") == -1:		#wait genelate start
 				break
 
 	while Sstr.find("Regenerate response") == -1:
@@ -138,7 +148,7 @@ async def chai(text):
 		for i in range(len(S)):
 			#print(f"find Regenerate: {await S[i].inner_text()}")
 			Sstr = await S[i].inner_text()
-			if Sstr.find("Regenerate response") != -1:
+			if Sstr.find("Regenerate response") != -1:		#is genelate complete
 				break
 
 	div = await page.query_selector_all(".markdown")
