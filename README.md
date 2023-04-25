@@ -42,4 +42,4 @@ Name.json -> 設定機器人默認名稱與別名(這個必填不然只要講話
 - 20230421
   - 更新data/Fnc/asyncChat.py內容:因應openai改變版面配置關係,微調selectChat函數,請一定要在data/json/chatGPT_Config.json輸入正確的
 - 20230425
-  - 更新data/Fnc/asyncChat.py內容:更新chai函數,使其可同時接受多用戶呼喚並依序作回應(功能測試中 但大概沒問題 <sub>有問題的只有我 我是垃圾</sub>)
+  - 更新data/Fnc/asyncChat.py內容:更新chai函數,使其可同時接受多用戶呼喚並依序作回應(但大概沒問題 <sub>有問題的只有我 我是垃圾</sub>)
