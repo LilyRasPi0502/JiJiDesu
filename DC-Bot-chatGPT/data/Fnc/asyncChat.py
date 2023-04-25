@@ -138,8 +138,8 @@ async def chai(text):
 				break
 				
 				
-	await page.get_by_placeholder("Send a message...").fill(text)
-	await page.get_by_placeholder("Send a message...").press("Enter")
+	await page.get_by_placeholder("message").fill(text)
+	await page.get_by_placeholder("message").press("Enter")
 	
 	
 	
