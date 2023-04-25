@@ -56,13 +56,21 @@ async def Login(arg):
 	print("chatGPt on login")
 	
 async def ClickAd():
-	await asyncio.sleep(5)
-	but = await page.query_selector(".btn")
-	if but is None:
-		return
-	if str(await but.inner_text()).find("Next") == -1:
-		return
-		
+
+	Sstr = ""
+	while True:
+		try:
+			ADB = await page.query_selector_all(".mb-5")
+		except:
+			ADB = None
+		await page.screenshot(path="data/example.png")
+		for i in range(len(ADB)):
+			Sstr = await ADB[i].inner_text()
+			if Sstr.find("ChatGPT") != -1:
+				break
+		if Sstr.find("ChatGPT") != -1:
+			break
+			
 	for i in range(3):
 		Sstr = ""
 		ADB = await page.query_selector_all(".btn")
