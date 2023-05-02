@@ -159,9 +159,14 @@ async def chai(text):
 			if Sstr.find("Regenerate response") != -1:		#is genelate complete
 				break
 
-	div = await page.query_selector_all(".markdown")
+	div = await page.query_selector_all(".text-base")
 	output_text = await div[-1].inner_text()
 	
+	output_text = output_text.replace("ChatGPT\n!", "")
+	output_text = output_text.replace("ChatGPT", "")
+	output_text = output_text.replace("This content may violate our content policy. If you believe this to be in error, please submit your feedback — your input will aid our research in this area.","")
+	
+
 	return output_text
 
 def Pwd(Pwd):
