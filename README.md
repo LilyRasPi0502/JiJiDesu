@@ -47,3 +47,4 @@ Name.json -> 設定機器人默認名稱與別名(這個必填不然只要講話
   - 更新data/Launcher.exe:Icon及Title更新
 - 20230502
   - 更新data/Fnc/asyncChat.py內容:更新chai函數,使其不會因為違反使用條款變橘字就無法撈到文字(除了完全無回覆文字以外目前大概沒甚麼問題 <sub>有問題的只有我 我是廢物</sub>)
+  - 更新data/bot.py內容:更新try-except若回覆為空則嘗試回覆Error
