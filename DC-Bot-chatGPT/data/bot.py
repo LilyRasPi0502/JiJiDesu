@@ -119,7 +119,11 @@ async def cmd(ctx, cmd):
 			text = await ChangeText(ctx, f"{json.load(f)['Character']}")
 			
 			Str = await chai(text)
-		await ctx.reply(Str)
+		try:
+			await ctx.reply(Str)
+		except:
+			await ctx.reply("Chat GPT Error.")
+
 		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {Str}")
 
 async def ChangeText(ctx, text):
