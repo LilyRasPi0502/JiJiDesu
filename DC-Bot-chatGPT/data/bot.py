@@ -120,11 +120,12 @@ async def cmd(ctx, cmd):
 			
 			Str = await chai(text)
 		try:
-			await ctx.reply(Str)
+			msg = await ctx.reply(Str)
 		except:
-			await ctx.reply("Chat GPT Error.")
+			
+			msg = await ctx.reply(f"{json.load(f)['Err']}")
 
-		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {Str}")
+		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {msg.content}")
 
 async def ChangeText(ctx, text):
 	if ctx.reference is not None:
