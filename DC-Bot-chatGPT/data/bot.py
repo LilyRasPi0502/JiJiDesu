@@ -116,7 +116,8 @@ async def cmd(ctx, cmd):
 		Send = True
 		async with ctx.channel.typing():
 			f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
-			text = await ChangeText(ctx, f"{json.load(f)['Character']}")
+			Chara = json.load(f)
+			text = await ChangeText(ctx, f"{Chara['Character']}")
 			Str = await chai(text)
 
 			for i in range(5):
@@ -132,7 +133,8 @@ async def cmd(ctx, cmd):
 					break
 
 			if Send == True:
-				msg = await ctx.reply(f"{json.load(f)['Err']}")
+				f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
+				msg = await ctx.reply(f"{Chara['Err']}")
 				Send = False
 		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {msg.content}")
 
