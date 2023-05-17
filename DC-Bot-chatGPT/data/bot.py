@@ -113,29 +113,22 @@ async def cmd(ctx, cmd):
 	
 	else:								#暴力連接chatGPT
 
-		Send = True
+		
 		async with ctx.channel.typing():
 			f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
 			Chara = json.load(f)
 			text = await ChangeText(ctx, f"{Chara['Character']}")
 			Str = await chai(text)
 
-			for i in range(5):
-			
-				try:
-					msg = await ctx.reply(Str)
+			try:
+				msg = await ctx.reply(Str)
 
-				except:
-					Str = await chai(text)
-
-				else:
-					Send = False
-					break
-
-			if Send == True:
+			except:
 				f = open("data/json/CharacterSet.json", "r", encoding="utf-8")
-				msg = await ctx.reply(f"{Chara['Err']}")
-				Send = False
+				text = await ChangeText(ctx, f"{Chara['Err']}")
+				Str = await chai(text)
+				msg = await ctx.reply(Str)
+			
 		print(f"[{Get_Time()}] Reply message to {str(ctx.guild)}.{str(ctx.channel)}.{ctx.author}: {msg.content}")
 
 async def ChangeText(ctx, text):
