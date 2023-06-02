@@ -60,7 +60,7 @@ async def ClickAd():
 	Sstr = ""
 	while True:
 		try:
-			ADB = await page.query_selector_all(".mb-5")
+			ADB = await page.query_selector_all(".text-lg")
 		except:
 			ADB = None
 		await page.screenshot(path="data/example.png")
